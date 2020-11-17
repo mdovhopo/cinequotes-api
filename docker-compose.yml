@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  cinequotes-api:
+    build:
+      context: .
+      dockerfile: Cinequotes.Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      PORT: 80
+      NODE_ENV: production
+      FIRESTORE_EMULATOR_HOST: "firestore:8505"
+      PUBSUB_EMULATOR_HOST: "pub-sub:8085"
+    depends_on:
+      - firestore
+  translate-worker:
+    build:
+      # assumed, worker directory will be at the same level, that this dir.
+      context: ../cinequotes-translate-worker
+    environment:
+      NODE_ENV: production
+      FIRESTORE_EMULATOR_HOST: "firestore:8505"
+      PUBSUB_EMULATOR_HOST: "pub-sub:8085"
+    depends_on:
+      - firestore
+      - pub-sub
+  firestore:
+    build:
+      context: .
+      dockerfile: Firestore.Dockerfile
+    ports:
+      - "8505:8505"
+  pub-sub:
+    build:
+      context: .
+      dockerfile: PubSub.Dockerfile
+    ports:
+      - "8085:8085"
