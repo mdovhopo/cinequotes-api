@@ -1,7 +1,11 @@
-import { Request, Response } from 'express';
-import * as MovieModel       from './movies.model';
-import * as QuoteModel       from './quotes.model';
-import { Languages, Locale } from './quotes.model';
+import { Request, Response }                    from 'express';
+import {MovieModelFactory}                      from '../services/core/movies.model';
+import { QuoteModelFactory, Languages, Locale } from '../services/core/quotes.model';
+import { firestore }                            from '../util/firestore';
+import { pubsub }                               from '../util/pubsub';
+
+const MovieModel = MovieModelFactory(firestore);
+const QuoteModel = QuoteModelFactory(firestore, pubsub, MovieModel);
 
 export const getMovies = async (req: Request, res: Response) => {
   try {
