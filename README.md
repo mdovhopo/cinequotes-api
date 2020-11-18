@@ -32,6 +32,12 @@ compose file assume that translate worker repo will be cloned at the same level 
 
 ## API
 
+## Setup Demo data - GET /api/util/setup-firestore-demo-data
+
+Simple method, added to simplify app testing.
+
+It inserts demo data to firestore, all data that already in firestore will be erased!
+
 ### Ping - /ping
 
 simple api call to verify, that service is running
