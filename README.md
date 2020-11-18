@@ -6,10 +6,27 @@ All requirements are listed in [Cinequotes.pdf](./Cinequotes.pdf) file.
 
 ## Run
 
-To run this application, You just need to use docker compose file, provided with application:
-```shell script
+To run this application, 
+first - You need to clone this repo, and translate worker to the same directory.
+
+```sh
+mkdir test
+cd test
+git clone https://github.com/mdovhopo/cinequotes-translate-worker.git
+git clone https://github.com/mdovhopo/cinequotes-api.git
+cd cinequotes-api
+```
+Than just run docker-compose inside cinequotes-api directory.
+```sh
 docker-compose up
 ```
+
+Run tests with
+
+```shell script
+npm test
+```
+
 **IMPORTANT:**
 compose file assume that translate worker repo will be cloned at the same level to this repo
 
